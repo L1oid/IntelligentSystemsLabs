@@ -3,17 +3,11 @@ c = int(num % 10)
 b = int((num % 100) / 10)
 a = int(num / 100)
 if a > c:
-    temp = a
-    a = c
-    c = temp
+    a, c = c, a
 if a > b:
-    temp = a
-    a = b
-    b = temp
+    a, b = b, a
 if c < b:
-    temp = c
-    c = b
-    b = temp
+    c, b = b, c
 if (a + c) / 2 == b:
     print("Красивое!")
 else:
