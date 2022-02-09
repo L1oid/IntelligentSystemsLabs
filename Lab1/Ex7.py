@@ -23,4 +23,4 @@ elif a == 0 and c:
     a, c = c, a
 elif a == 0 and d:
     a, d = d, a
-print(d + 10 * (c + 10 * (b + 10 * a)))
+print(str(a) + str(b) + str(c) + str(d))
