@@ -1,10 +1,8 @@
 num = int(input())
-a = num % 10
-num //= 10
-b = num % 10
-num //= 10
-c = num % 10
-d = num // 10
+a = int(num % 10)
+b = int((num % 100) / 10)
+c = int((num / 100) % 10)
+d = int(num / 1000)
 if a > b:
     a, b = b, a
 if b > c:
@@ -17,10 +15,4 @@ if b > c:
     b, c = c, b
 if a > b:
     a, b = b, a
-if a == 0 and b:
-    a, b = b, a
-elif a == 0 and c:
-    a, c = c, a
-elif a == 0 and d:
-    a, d = d, a
 print(str(a) + str(b) + str(c) + str(d))
