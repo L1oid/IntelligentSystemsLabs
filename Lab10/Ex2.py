@@ -23,7 +23,7 @@ request = requests.get(f"http://geocode-maps.yandex.ru/1.x/?apikey={api_key}&geo
 print(request.text)
 request = requests.get(f"http://geocode-maps.yandex.ru/1.x/?apikey={api_key}&geocode=Калининград&format=json")
 print(request.text)
-request = requests.get(f"http://geocode-maps.yandex.ru/1.x/?apikey={api_key}&geocode=Белово&format=json")
+request = requests.get(f"http://geocode-maps.yandex.ru/1.x/?apikey={api_key}&geocode=Ленинск-Кузнецкий&format=json")
 print(request.text)
 
 #c
