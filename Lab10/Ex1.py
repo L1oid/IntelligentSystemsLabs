@@ -2,7 +2,7 @@ import requests
 
 response = requests.get("https://static-maps.yandex.ru/1.x/?ll=86.093348%2C55.351368&spn=0.002,0.002&l=map")
 print(response)
-response = requests.get("https://static-maps.yandex.ru/1.x/?ll=86.145423%2C55.348943&spn=0.005,0.005&l=map")
+response = requests.get("https://static-maps.yandex.ru/1.x/?ll=86.195921%2C54.633625&spn=0.001,0.001&l=map")
 print(response)
 response = requests.get("https://static-maps.yandex.ru/1.x/?ll=2.294513%2C48.857747&spn=0.005,0.005&l=sat")
 print(response)
