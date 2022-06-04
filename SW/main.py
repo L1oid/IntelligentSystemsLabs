@@ -196,9 +196,8 @@ def main():
     dp.add_handler(CommandHandler("find_random_movie", find_random_movie))
     dp.add_handler(CommandHandler("find_list_movie", find_list_movie))
 
-    movie_handler = MessageHandler(Filters.text, find_list_movie)
     dp.add_handler(CallbackQueryHandler(find_name_movie))
-    dp.add_handler(movie_handler)
+    dp.add_handler(MessageHandler(Filters.text, find_list_movie))
 
     updater.start_polling()
     updater.idle()
