@@ -13,10 +13,11 @@ import kinopoisk_unofficial.client.exception.not_found
 
 from kinopoisk.movie import Movie
 
+
 api_client = KinopoiskApiClient("92281495-5e0b-445d-bb8f-9d7b55c77525")
 bot = telegram.Bot(token='5354662458:AAEVEhmBwoZIji8S6jVt_JjkgO7hnKihcEc')
 
-reply_keyboard = [['/find_random_movie']]
+reply_keyboard = [['Рандомный фильм']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
 
 
@@ -49,13 +50,16 @@ def find_random_movie(update, context):
             print("Пустой ID, ищу дальше...")
 
 
-def find_list_movie(update, context):
-    movie_list = Movie.objects.search(update.message.text)
-    button_list = []
-    for i in range(0, len(movie_list)):
-        button_list.append(InlineKeyboardButton(movie_list[i].title, callback_data=movie_list[i].id))
-    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
-    update.message.reply_text("Найденные фильмы: ", reply_markup=reply_markup)
+def message(update, context):
+    if update.message.text == "Рандомный фильм":
+        find_random_movie(update, context)
+    else:
+        movie_list = Movie.objects.search(update.message.text)
+        button_list = []
+        for i in range(0, len(movie_list)):
+            button_list.append(InlineKeyboardButton(movie_list[i].title, callback_data=movie_list[i].id))
+        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+        update.message.reply_text("Найденные фильмы: ", reply_markup=reply_markup)
 
 
 def build_menu(buttons, n_cols, header_buttons=None, footer_buttons=None):
@@ -79,7 +83,6 @@ def find_name_movie(update, context):
         movie_info(query, response, response2, variant)
     except kinopoisk_unofficial.client.exception.not_found.NotFound:
         query.message.reply_text("Это не фильм/мультфильм/сериал. Выберите что-нибудь другое.")
-
 
 
 def movie_info(update, response, response2, movie_id):
@@ -193,11 +196,8 @@ def main():
     dp.add_handler(CommandHandler("help", tg_help))
     dp.add_handler(CommandHandler("close_keyboard", close_keyboard))
 
-    dp.add_handler(CommandHandler("find_random_movie", find_random_movie))
-    dp.add_handler(CommandHandler("find_list_movie", find_list_movie))
-
     dp.add_handler(CallbackQueryHandler(find_name_movie))
-    dp.add_handler(MessageHandler(Filters.text, find_list_movie))
+    dp.add_handler(MessageHandler(Filters.text, message))
 
     updater.start_polling()
     updater.idle()
